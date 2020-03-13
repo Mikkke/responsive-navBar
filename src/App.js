@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Nav from "./components/Nav";
+import Acceuil from "./components/Accueil";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    navbarOpen: false
+  };
+
+  handleNavbar = () => {
+    this.setState({ navbarOpen: !this.state.navbarOpen });
+  };
+  render() {
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Nav
+            navbarState={this.state.navbarOpen}
+            handleNavbar={this.handleNavbar}
+          />
+          <Switch>
+            <Route exact path="/" component={Acceuil} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default App;
